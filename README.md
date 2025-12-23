@@ -1,104 +1,105 @@
-Secure Password Generator Service
+# Secure Password Generator API
 
-A stateless Spring Boot REST service that generates secure passwords based on configurable constraints and evaluates password strength.
-Designed to demonstrate backend service design, security-aware logic, and clean API architecture, similar to production microservices.
+A Spring Boot REST API that generates secure passwords based on configurable constraints and returns a strength classification.
 
-Overview
+This project demonstrates backend API design, stateless services, and clean separation of concerns.
 
-This service exposes a REST endpoint that accepts password constraints (length, character sets) and returns a securely generated password along with a computed strength classification.
+---
 
-The project emphasizes:
-API-first design
-Stateless processing
-Separation of concerns
-Defensive input handling
+## Tech Stack
 
-Key Features
+- Java 21 (LTS)
+- Spring Boot 3
+- Maven
+- REST (JSON over HTTP)
 
-Secure password generation using configurable rules
+---
 
-Password strength evaluation (WEAK, MEDIUM, STRONG)
+## API
 
-Stateless REST API (no sessions, no persistence)
+### Generate Password
 
-Clean layered architecture
+**Endpoint:** `POST /api/password/generate`
 
-JSON-based request/response contract
-
-Tech Stack
-
-Language: Java 21 (LTS)
-
-Framework: Spring Boot 3
-
-Build Tool: Maven
-
-API Style: REST (JSON over HTTP)
-
-Server: Embedded Tomcat
-
-Architecture
-Controller → Service → Utility
-
-
-Controller: HTTP request handling and validation
-
-Service: Core business logic
-
-Utility: Password generation and strength evaluation
-
-Models: Request/response contracts
-
-Exception Layer: Centralized error handling
-
-API Specification
-Generate Password
-
-POST /api/password/generate
-
-Request
+**Request:**
+```json
 {
   "length": 10,
   "upper": true,
   "digits": true,
   "symbols": true
 }
+```
 
-Response
+**Response:**
+```json
 {
   "password": "vM_nP<Qx2y",
   "strength": "MEDIUM"
 }
+```
 
-Running Locally
-Prerequisites
+---
 
-Java 21+
+## Architecture
+```
+controller/
+service/
+util/
+model/
+exception/
+```
 
-Maven
+- **Controller** handles HTTP and validation
+- **Service** contains business logic
+- **Utility** handles password generation and strength evaluation
+- **Models** define request/response contracts
+- **Centralized exception handling**
 
-Run
+---
+
+## Run Locally
+
+### Requirements
+
+- Java 21+
+- Maven
+
+### Start
+```bash
 mvn spring-boot:run
+```
 
-
-Service starts on:
-
+Service runs on:
+```
 http://localhost:8080
+```
 
-Testing the API
-PowerShell
+---
+
+## Test
+
+**PowerShell:**
+```powershell
 Invoke-RestMethod `
   -Uri http://localhost:8080/api/password/generate `
   -Method POST `
   -ContentType "application/json" `
   -Body '{"length":10,"upper":true,"digits":true,"symbols":true}'
+```
 
-Design Principles
+---
 
-Statelessness: Each request is independent
+## Design Notes
 
-Separation of concerns: Clear responsibility per layer
+- Stateless API (no persistence)
+- Secure random password generation
+- Clean layered architecture
+- Easy to extend (rate limiting, entropy scoring, auth)
 
-Security awareness: Secure random generation
+---
 
-Maintainability: Modular and extensible design
+## Author
+
+**Yashaswi Nagpurkar**  
+GitHub: [https://github.com/yashaswi1109](https://github.com/yashaswi1109)
