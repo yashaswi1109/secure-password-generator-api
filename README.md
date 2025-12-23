@@ -98,8 +98,3 @@ Invoke-RestMethod `
 - Easy to extend (rate limiting, entropy scoring, auth)
 
 ---
-
-## Author
-
-**Yashaswi Nagpurkar**  
-GitHub: [https://github.com/yashaswi1109](https://github.com/yashaswi1109)
